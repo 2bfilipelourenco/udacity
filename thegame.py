@@ -30,7 +30,7 @@ class Copiador(Player):
 class Ciclo(Player):
     pass # Eu entendi a lógica, mas não estou conseguindo executar o código. Eu sei que tenho que dar um valor inicial para que a partir desse valor, eu consiga determinar a próxima jogada.
 
-class Game: # Classe que possui as definições que darão ao usuário as informações/estatísticas do jogo.
+class Game: # Classe que possui as definições que darão ao usuário as informações/estáticas do jogo.
     def __init__(self, e1, e2):
         self.e1 = e1
         self.e2 = e2
@@ -69,7 +69,7 @@ class Game: # Classe que possui as definições que darão ao usuário as inform
         else:
             print('> > > O jogo ficou EMPATADO!')
 
-    def play_round(self, partida_atual, partida_final, e1_acao_anterior, e2_acao_anterior):
+    def partida(self, partida_atual, partida_final, e1_acao_anterior, e2_acao_anterior):
         if partida_atual == 1:
            e1_acao = self.e1.acao('tesoura', 'pedra')
            e2_acao = self.e2.acao('tesoura', 'pedra')
@@ -81,7 +81,7 @@ class Game: # Classe que possui as definições que darão ao usuário as inform
             print(f'\nO JOGADOR Nº 1 escolheu {e1_acao} e o JOGADOR Nº 2 escolheu {e2_acao}.')
             return e1_acao, e2_acao
 
-    def play_match(self):
+    def disputa(self):
         partidas = int(input('\nQuantas partidas você vai querer jogar? '))
         input('\nQue o jogo comece!\n' + '> > > Aperte a tecla enter para continuar.')
         e1_pontuacao, e2_pontuacao = 0, 0
@@ -90,12 +90,12 @@ class Game: # Classe que possui as definições que darão ao usuário as inform
         
         for round in range(1, partidas+1):
                 print(f'\nPARTIDA DE Nº {round}')
-                e1_acao, e2_acao = self.play_round(round, partidas, e1_acao_anterior, e2_acao_anterior)
+                e1_acao, e2_acao = self.partida(round, partidas, e1_acao_anterior, e2_acao_anterior)
                 vencedor_partida = self.vencedor(e1_acao, e2_acao)
                 e1_pontuacao, e2_pontuacao = self.placar(vencedor_partida, e1_pontuacao, e2_pontuacao)
 
         self.placar_final(e1_pontuacao, e2_pontuacao)
-        sleep(15)
+        sleep(15) # Faz uma contagem oculta de 15 segundos para que o terminal não feche sem que o usuário consiga visualizar as estatísticas finais.
 
 if __name__ == '__main__':
     print('Aleatorio ~ Humano ~ Copiador ~ Ciclo\n')
@@ -103,4 +103,4 @@ if __name__ == '__main__':
     j1 = input('Digite a opção que será o jogador Nº 1?! ')
     j2 = input('Digite a opção que será o jogador Nº 2?! ')
     game = Game(jogadores[j1], jogadores[j2])
-    game.play_match()
+    game.disputa()
