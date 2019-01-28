@@ -1,8 +1,8 @@
 # udacity
 Final Project - Rock, Scissor n' Paper
-- - >
+
 This is my final project 'Rock, Scissor n' Paper' from Udacity course 'Introduction to Programming'.
-- - >
+
 I used six (6) class in my program: 
 
 - Player ~ It is the class that will be inherited by the other class: Aleatorio, Humano, Copiador and Ciclo; 
