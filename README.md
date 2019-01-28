@@ -12,7 +12,7 @@ I used to help me to do this project, some sites like:
 
 - Curso em Vídeo (https://www.youtube.com/channel/UCrWvhVmt0Qac3HgsjQK62FQ)
 
-- And friends... ;) 
+- And friends ... ;) ...
 
 ## Explantion
 I used six (6) class in my program: 
