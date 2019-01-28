@@ -2,24 +2,25 @@ from random import randint
 from time import sleep
 
 class Player:
-    acoes_validas = ['pedra', 'papel', 'tesoura']
+    acoes_validas = ['pedra', 'papel', 'tesoura'] # Ações válidas para o jogador seja ele humano ou computador;
+
     def acao(self, minha_acao, acao_oponente):
         return minha_acao
 
 class Aleatorio(Player):
     def acao(self, minha_acao, acao_oponente):
-        return self.acoes_validas[randint(0, 2)]
+        return self.acoes_validas[randint(0, 2)] # Escolhe aleatoriamente uma opção de 0 a 2 equivalente as opções definidas na variável 'acoes_validas';
         
 class Humano(Player):
     def acao(self, minha_acao, acao_oponente):
-        acoes_jogador = input('Digite a sua jogada e aperte a tecla enter ~ Pedra, Papel ou Tesoura \n')
+        acoes_jogador = input('Digite a sua jogada e aperte a tecla enter ~ Pedra, Papel ou Tesoura \n') # Recebe na variável 'acoes_jogador' a jogada escolhida pelo usuário.
         while acoes_jogador not in self.acoes_validas:
-            acoes_jogador = input('\nJogada inválida. Tente digitar as palavras ~ Pedra, Papel ou Tesoura ~ para jogar.\n')
+            acoes_jogador = input('\nJogada inválida. Tente digitar as palavras ~ Pedra, Papel ou Tesoura ~ para jogar.\n') # Caso a jogada não seja digitada corretamente, emitirá uma mensagem invalidando o input até que o mesmo esteja correto.
         return acoes_jogador
 
 class Copiador(Player):
     def acao(self, minha_acao, acao_oponente):
-        if acao_oponente == 'pedra':
+        if acao_oponente == 'pedra': # O computador joga em relação ao input escolhido pelo adversário.
             return 'pedra'
         if acao_oponente == 'papel':
             return 'papel'
@@ -27,9 +28,9 @@ class Copiador(Player):
             return 'tesoura'
 
 class Ciclo(Player):
-    pass
+    pass # Eu entendi a lógica, mas não estou conseguindo executar o código. Eu sei que tenho que dar um valor inicial para que a partir desse valor, eu consiga determinar a próxima jogada.
 
-class Game:
+class Game: # Classe que possui as definições que darão ao usuário as informações/estáticas do jogo.
     def __init__(self, e1, e2):
         self.e1 = e1
         self.e2 = e2
