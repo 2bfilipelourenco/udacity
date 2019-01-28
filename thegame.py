@@ -8,7 +8,7 @@ class Player:
 
 class Aleatorio(Player):
     def acao(self, minha_acao, acao_oponente):
-        return self.acoes_validas[randint(0, len(self.acoes_validas)-1)]
+        return self.acoes_validas[randint(0, 2)]
         
 class Humano(Player):
     def acao(self, minha_acao, acao_oponente):
