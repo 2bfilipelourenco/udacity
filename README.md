@@ -6,11 +6,11 @@ This is my final project 'Rock, Scissor n' Paper' from Udacity course 'Introduct
 
 I used to help me to do this project, some sites like: 
 
-- Python (https://docs.python.org/3/tutorial/)
+- Python (https://docs.python.org/3/tutorial/);
 
-- W3Schools (https://www.w3schools.com/python/default.asp)
+- W3Schools (https://www.w3schools.com/python/default.asp);
 
-- Curso em Vídeo (https://www.youtube.com/channel/UCrWvhVmt0Qac3HgsjQK62FQ)
+- Curso em Vídeo (https://www.youtube.com/channel/UCrWvhVmt0Qac3HgsjQK62FQ);
 
 - And friends ... ;) ...
 
