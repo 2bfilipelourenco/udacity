@@ -30,7 +30,7 @@ class Copiador(Player):
 class Ciclo(Player):
     pass # Eu entendi a lógica, mas não estou conseguindo executar o código. Eu sei que tenho que dar um valor inicial para que a partir desse valor, eu consiga determinar a próxima jogada.
 
-class Game: # Classe que possui as definições que darão ao usuário as informações/estáticas do jogo.
+class Game: # Classe que possui as definições que darão ao usuário as informações/estatísticas do jogo.
     def __init__(self, e1, e2):
         self.e1 = e1
         self.e2 = e2
