@@ -6,12 +6,14 @@ class Player():
 
     def __init__(self):
         self.placar = 0
+        self.my_move = None
+        self.last_opponent_move = None
 
     def play(self):
         return 'pedra'
 
-    def learn(self, ultima_jogada):
-        pass
+    def learn(self, my_move): # Se eu colocar o 'last_oponnent_move' aqui, o aplicativo dá 'crash'.
+        self.my_move = my_move
 
 class RandomPlayer(Player):
     def play(self):
@@ -25,19 +27,35 @@ class HumanPlayer(Player):
         return player_move
 
 class CyclePlayer(Player):
-    pass
+    def play(self):
+        if self.my_move == None:
+            return 'pedra'
+        elif self.my_move == 'pedra':
+            return 'papel'
+        elif self.my_move == 'papel':
+            return 'tesoura'
+        else:
+            return 'pedra'
 
 class ReflectPlayer(Player):
-    pass
+    def play(self):
+        if self.last_opponent_move is None:
+            return Player.play(self)
+        return self.last_opponent_move
 
+    def learn(self, last_opponent_move):
+        self.last_opponent_move = last_opponent_move
+        
 class Game():
     def __init__(self, player1, player2):
         self.player1 = player1
         self.player2 = player2
     
     def play_match(self):
-        print("\n PEDRA, PAPEL ou TESOURA ~ É melhor de 3! O jogo começou:\n")
-        for partida in range(3):
+        print('\n PEDRA, PAPEL ou TESOURA ~ O jogo começou!')
+        rounds = int(input(' > > > Digite o número de partidas que você quer jogar:\n '))
+        
+        for partida in range(0, rounds):
             print(f'\n \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/')
             print(f" \/\/\/\/\/\/ PARTIDA DE Nº: {partida} \/\/\/\/\/\/")
             self.play_round()
@@ -59,6 +77,9 @@ class Game():
     def play_round(self):
         player1_jogada = self.player1.play()
         player2_jogada = self.player2.play()
+
+        self.player1.learn(player2_jogada)
+        self.player2.learn(player1_jogada)
 
         if ((player1_jogada == 'pedra' and player2_jogada == 'tesoura') or
             (player1_jogada == 'tesoura' and player2_jogada == 'papel') or
@@ -84,8 +105,18 @@ class Game():
             print(f' O placar do jogo está: {self.player1.placar} --||-- {self.player2.placar}')
             print(f' Ambos fizeram a mesma jogada. O jogador Nº1 jogou "{player1_jogada}" e o jogador Nº2 jogou "{player2_jogada}".')
 
-        self.player1.learn(player2_jogada)
-        self.player2.learn(player1_jogada)
-
 game = Game(RandomPlayer(), HumanPlayer())
 game.play_match()
+
+#chamada_escolhas = ' [1]RandomPlayer, [2]HumanPlayer, [3]ReflectPlayer, [4]CyclePlayer'
+
+#if __name__ == '__main__':
+    #jogadores_disponiveis = {1: RandomPlayer(), 2: HumanPlayer(), 3: ReflectPlayer(), 4: CyclePlayer()}
+    #print (chamada_escolhas)
+    #print(f' ************************************************************************************\n')
+
+    #e1 = input(" Digite o número correspondente ao jogador Nº1: ")
+    #e2 = input(" Digite o número correspondente ao jogador Nº2: ")
+
+    #game = Game(jogadores_disponiveis[e1], jogadores_disponiveis[e2])
+    #game.play_match()
