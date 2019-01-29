@@ -41,7 +41,17 @@ class Game():
             print(f'\n \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/')
             print(f" \/\/\/\/\/\/ PARTIDA DE Nº: {partida} \/\/\/\/\/\/")
             self.play_round()
-        
+
+        if self.player1.placar > self.player2.placar:
+            print('\n Parabéns! O jogador Nº1 ganhou o jogo.')
+            print(f' ************************************************************************************')
+        elif self.player1.placar > self.player2.placar:
+            print('\n Parabéns! O jogador Nº2 ganhou o jogo.!')
+            print(f' ************************************************************************************')
+        else:
+            print('\n Ops! O jogo ficou empatado ... ;) ...')
+            print(f' ************************************************************************************')
+
         print(f'\n O placar final do jogo ficou em: {self.player1.placar} --||-- {self.player2.placar}')
         print(" > > > O jogo acabou! Essa janela será fechada em 15 segundos.")
         sleep(15)
