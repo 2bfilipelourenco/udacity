@@ -23,6 +23,6 @@ I used six (6) class in my program:
 
 - ReflectPlayer ~ The (class) player that will be command by a computer and will play a copy game; 
 
-- CyclerPlayer ~ The (class) player that will be command by a computer and will player a cycle game. Always in this sequence: Rock, scissor and them paper; 
+- CyclePlayer ~ The (class) player that will be command by a computer and will player a cycle game. Always in this sequence: Rock, scissor and them paper; 
 
 - Game ~ The class that will define/control the winner (def vencedor), the scoreboard (def placar), the final score (def placar_final), the round (def play_round) and the match (def play_match) of the game.
