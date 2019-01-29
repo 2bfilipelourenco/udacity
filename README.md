@@ -1,6 +1,10 @@
 # udacity
 Final Project - Rock, Scissor n' Paper
 
+## First
+
+Thank you Juliano for the support and for the patience about my night messages ... XD ...
+
 ## Introduction
 This is my final project 'Rock, Scissor n' Paper' from Udacity course 'Introduction to Programming'.
 
