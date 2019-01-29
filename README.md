@@ -19,7 +19,7 @@ I used to help me to do this project, some sites like:
 ## Explantion
 I used six (6) class in my program: 
 
-- Player ~ It is the class that will be inherited by the other class: Aleatorio, Humano, Copiador and Ciclo; 
+- Player ~ It is the class that will be inherited by the other class: RandomPlayer, HumanPlayer, ReflectPlayer and CyclePlayer; 
 
 - RandomPlayer ~ The (class) player that will be command by a computer and will play random; 
 
@@ -29,4 +29,4 @@ I used six (6) class in my program:
 
 - CyclePlayer ~ The (class) player that will be command by a computer and will player a cycle game. Always in this sequence: Rock, scissor and them paper; 
 
-- Game ~ The class that will define/control the winner (def vencedor), the scoreboard (def placar), the final score (def placar_final), the round (def play_round) and the match (def play_match) of the game.
+- Game ~ The class that will define/control the winner, the scoreboard, the final score (def placar_final), the round and the match of the game.
