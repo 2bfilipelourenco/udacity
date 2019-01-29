@@ -1,106 +1,81 @@
 from random import randint
 from time import sleep
 
-class Player:
-    acoes_validas = ['pedra', 'papel', 'tesoura'] # Ações válidas para o jogador seja ele humano ou computador;
+class Player():
+    acoes_validas = ['pedra', 'papel', 'tesoura']
 
-    def acao(self, minha_acao, acao_oponente):
-        return minha_acao
+    def __init__(self):
+        self.placar = 0
 
-class Aleatorio(Player):
-    def acao(self, minha_acao, acao_oponente):
-        return self.acoes_validas[randint(0, 2)] # Escolhe aleatoriamente uma opção de 0 a 2 equivalente as opções definidas na variável 'acoes_validas';
+    def play(self):
+        return 'pedra'
+
+    def learn(self, ultima_jogada):
+        pass
+
+class RandomPlayer(Player):
+    def play(self):
+        return self.acoes_validas[randint(0, 2)]
+
+class HumanPlayer(Player):
+    def play(self):
+        player_move = input(' Digite sua jogada utilizando apenas letras minúsculas: pedra, papel ou tesoura!\n ')
+        while player_move not in self.acoes_validas:
+            player_move = input(' Jogada digitada inválida. Tente digitar uma dessas jogadas: pedra, papel ou tesoura!\n ')
+        return player_move
+
+class CyclePlayer(Player):
+    pass
+
+class ReflectPlayer(Player):
+    pass
+
+class Game():
+    def __init__(self, player1, player2):
+        self.player1 = player1
+        self.player2 = player2
+    
+    def play_match(self):
+        print("\n PEDRA, PAPEL ou TESOURA ~ É melhor de 3! O jogo começou:\n")
+        for partida in range(3):
+            print(f'\n \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/')
+            print(f" \/\/\/\/\/\/ PARTIDA DE Nº: {partida} \/\/\/\/\/\/")
+            self.play_round()
         
-class Humano(Player):
-    def acao(self, minha_acao, acao_oponente):
-        acoes_jogador = input('Digite a sua jogada e aperte a tecla enter ~ Pedra, Papel ou Tesoura \n') # Recebe na variável 'acoes_jogador' a jogada escolhida pelo usuário.
-        while acoes_jogador not in self.acoes_validas:
-            acoes_jogador = input('\nJogada inválida. Tente digitar as palavras ~ Pedra, Papel ou Tesoura ~ para jogar.\n') # Caso a jogada não seja digitada corretamente, emitirá uma mensagem invalidando o input até que o mesmo esteja correto.
-        return acoes_jogador
+        print(f'\n O placar final do jogo ficou em: {self.player1.placar} --||-- {self.player2.placar}')
+        print(" > > > O jogo acabou! Essa janela será fechada em 15 segundos.")
+        sleep(15)
 
-class Copiador(Player):
-    def acao(self, minha_acao, acao_oponente):
-        if acao_oponente == 'pedra': # O computador joga em relação ao input escolhido pelo adversário.
-            return 'pedra'
-        if acao_oponente == 'papel':
-            return 'papel'
+    def play_round(self):
+        player1_jogada = self.player1.play()
+        player2_jogada = self.player2.play()
+
+        if ((player1_jogada == 'pedra' and player2_jogada == 'tesoura') or
+            (player1_jogada == 'tesoura' and player2_jogada == 'papel') or
+            (player1_jogada == 'papel' and player2_jogada == 'pedra')):
+            self.player1.placar += 1
+            print(f' ____________________________________________________________________________________')
+            print('\n Jogador Nº 1 ganhou a partida!')
+            print(f' O placar do jogo está: {self.player1.placar} --||-- {self.player2.placar}')
+            print(f' O jogador Nº1 jogou "{player1_jogada}" e o jogador Nº2 jogou "{player2_jogada}".')
+
+        elif ((player2_jogada == 'pedra' and player1_jogada == 'tesoura') or
+              (player2_jogada == 'tesoura' and player1_jogada == 'papel') or
+              (player2_jogada == 'papel' and player1_jogada == 'pedra')):
+            self.player2.placar += 1
+            print(f' ____________________________________________________________________________________')
+            print('\n Jogador Nº 2 ganhou a partida!')
+            print(f' O placar do jogo está: {self.player1.placar} --||-- {self.player2.placar}')
+            print(f' O jogador Nº1 jogou "{player1_jogada}" e o jogador Nº2 jogou "{player2_jogada}".')
+
         else:
-            return 'tesoura'
+            print(f' ____________________________________________________________________________________')
+            print('\n A partida está empatada!')
+            print(f' O placar do jogo está: {self.player1.placar} --||-- {self.player2.placar}')
+            print(f' Ambos fizeram a mesma jogada. O jogador Nº1 jogou "{player1_jogada}" e o jogador Nº2 jogou "{player2_jogada}".')
 
-class Ciclo(Player):
-    pass # Eu entendi a lógica, mas não estou conseguindo executar o código. Eu sei que tenho que dar um valor inicial para que a partir desse valor, eu consiga determinar a próxima jogada.
+        self.player1.learn(player2_jogada)
+        self.player2.learn(player1_jogada)
 
-class Game: # Classe que possui as definições que darão ao usuário as informações/estáticas do jogo.
-    def __init__(self, e1, e2):
-        self.e1 = e1
-        self.e2 = e2
-
-    def vencedor(self, e1_acao, e2_acao):
-        if e1_acao == e2_acao:
-            return '> > > Não houveram vencedores!\n', 0
-        elif ((e1_acao == 'pedra' and e2_acao == 'tesoura') or
-              (e1_acao == 'tesoura' and e2_acao == 'papel') or
-              (e1_acao == 'papel' and e2_acao == 'pedra')):
-            print('> > > O JOGADOR Nº 1 ganhou!\n')
-            return 1
-        else:
-            print('> > > O JOGADOR Nº 2 ganhou!\n')
-            return 2
-
-    def placar(self, ganhador_partida, e1_placar_anterior, e2_placar_anterior):
-        if ganhador_partida == 1:
-            e1_novo_placar = e1_placar_anterior + 1
-            print(f'O Placar do JOGADOR Nº 1 é [{e1_novo_placar}] e o placar do JOGADOR Nº 2 é [{e2_placar_anterior}].\n')
-            return e1_novo_placar, e2_placar_anterior
-        elif ganhador_partida == 2:
-            e2_novo_placar = e2_placar_anterior + 1
-            print(f'O Placar do JOGADOR Nº 1 é [{e1_placar_anterior}] e o placar do JOGADOR Nº 2 é [{e2_novo_placar}].\n')
-            return e1_placar_anterior, e2_novo_placar
-        else:
-            print(f'O Placar do JOGADOR Nº 1 é [{e1_placar_anterior}] e o placar do JOGADOR Nº 2 é [{e2_placar_anterior}].\n')
-            return e1_placar_anterior, e2_placar_anterior
-
-    def placar_final(self, e1_pontuacao, e2_pontuacao):
-        print(f'\nO placar final ficou em [{e1_pontuacao}] X [{e2_pontuacao}].')
-        if e1_pontuacao > e2_pontuacao:
-            print('> > > Parabéns JOGADOR Nº 1!')
-        elif e1_pontuacao < e2_pontuacao:
-            print('> > > Parabéns JOGADOR Nº 2!')
-        else:
-            print('> > > O jogo ficou EMPATADO!')
-
-    def partida(self, partida_atual, partida_final, e1_acao_anterior, e2_acao_anterior):
-        if partida_atual == 1:
-           e1_acao = self.e1.acao('tesoura', 'pedra')
-           e2_acao = self.e2.acao('tesoura', 'pedra')
-           print(f'\nO JOGADOR Nº 1 escolheu {e1_acao} e o JOGADOR Nº 2 escolheu {e2_acao}.')
-           return e1_acao, e2_acao
-        else:
-            e1_acao = self.e1.acao(e1_acao_anterior, e2_acao_anterior)
-            e2_acao = self.e2.acao(e1_acao_anterior, e2_acao_anterior)
-            print(f'\nO JOGADOR Nº 1 escolheu {e1_acao} e o JOGADOR Nº 2 escolheu {e2_acao}.')
-            return e1_acao, e2_acao
-
-    def disputa(self):
-        partidas = int(input('\nQuantas partidas você vai querer jogar? '))
-        input('\nQue o jogo comece!\n' + '> > > Aperte a tecla enter para continuar.')
-        e1_pontuacao, e2_pontuacao = 0, 0
-        e1_acao_anterior = 'tesoura'
-        e2_acao_anterior = 'papel'
-        
-        for round in range(1, partidas+1):
-                print(f'\nPARTIDA DE Nº {round}')
-                e1_acao, e2_acao = self.partida(round, partidas, e1_acao_anterior, e2_acao_anterior)
-                vencedor_partida = self.vencedor(e1_acao, e2_acao)
-                e1_pontuacao, e2_pontuacao = self.placar(vencedor_partida, e1_pontuacao, e2_pontuacao)
-
-        self.placar_final(e1_pontuacao, e2_pontuacao)
-        sleep(15) # Faz uma contagem oculta de 15 segundos para que o terminal não feche sem que o usuário consiga visualizar as estatísticas finais.
-
-if __name__ == '__main__':
-    print('Aleatorio ~ Humano ~ Copiador ~ Ciclo\n')
-    jogadores = {'Aleatorio': Aleatorio(), 'Humano': Humano(), 'Copiador': Copiador(), 'Ciclo': Ciclo()}
-    j1 = input('Digite a opção que será o jogador Nº 1?! ')
-    j2 = input('Digite a opção que será o jogador Nº 2?! ')
-    game = Game(jogadores[j1], jogadores[j2])
-    game.disputa()
+game = Game(RandomPlayer(), HumanPlayer())
+game.play_match()
