@@ -1,7 +1,7 @@
 # udacity
 Final Project - Rock, Scissor n' Paper
 
-## First
+## Great Professional Juliano
 
 Thank you Juliano for the support and for the patience about my night messages ... XD ...
 
