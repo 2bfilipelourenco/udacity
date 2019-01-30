@@ -29,4 +29,4 @@ I used six (6) class in my program:
 
 - CyclePlayer ~ The (class) player that will be command by a computer and will player a cycle game. Always in this sequence: Rock, scissor and them paper; 
 
-- Game ~ The class that will define/control the winner, the scoreboard, the final score (def placar_final), the round and the match of the game.
+- Game ~ The class that will define/control the winner, the scoreboard, the final score, the round and the match of the game.
