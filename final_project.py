@@ -25,9 +25,9 @@ class RandomPlayer(Player):
 
 class HumanPlayer(Player):
     def play(self):
-        player_move = input(' Digite sua jogada utilizando apenas letras minúsculas: pedra, papel ou tesoura!\n ')
+        player_move = input(' Digite: Pedra, Papel ou Tesoura!\n ').lower()
         while player_move not in self.acoes_validas:
-            player_move = input(' Jogada digitada inválida. Tente digitar uma dessas jogadas: pedra, papel ou tesoura!\n ')
+            player_move = input(' Digite: Pedra, Papel ou Tesoura!\n ').lower()
         return player_move
 
 
@@ -60,25 +60,23 @@ class Game():
 
     def play_match(self):
         print('\n PEDRA, PAPEL ou TESOURA ~ O jogo começou!')
-        rounds = int(input(' > > > Digite o número de partidas que você quer jogar:\n '))
+        rounds = int(input(' > > > Digite o número de partidas '
+                           'que você quer jogar:\n '))
 
         for partida in range(0, rounds):
-            print(f'\n ****************************************************************************')
-            print(f' ***************************** PARTIDA DE Nº: {partida} *****************************')
+            print(f'\n **************************')
+            print(f' **** PARTIDA DE Nº: {partida} ****')
             self.play_round()
 
         if self.player1.placar > self.player2.placar:
             print('\n Parabéns! O jogador Nº1 ganhou o jogo.')
-            print(f' ****************************************************************************')
-        elif self.player1.placar > self.player2.placar:
-            print('\n Parabéns! O jogador Nº2 ganhou o jogo.!')
-            print(f' ****************************************************************************')
+        elif self.player1.placar < self.player2.placar:
+            print('\n Parabéns! O jogador Nº2 ganhou o jogo.')
         else:
             print('\n Ops! O jogo ficou empatado ... ;) ...')
-            print(f' ****************************************************************************')
 
-        print(f'\n O placar final do jogo ficou em: {self.player1.placar} --||-- {self.player2.placar}')
-        print(' > > > O jogo acabou! Essa janela será fechada em 15 segundos.')
+        print(f'\n Placar: {self.player1.placar} x {self.player2.placar}')
+        print(' > O jogo acabou! Essa janela será fechada em 15 segundos.')
         sleep(15)
 
     def play_round(self):
@@ -92,40 +90,41 @@ class Game():
                 (player1_jogada == 'tesoura' and player2_jogada == 'papel') or
                 (player1_jogada == 'papel' and player2_jogada == 'pedra')):
             self.player1.placar += 1
-            print(f' ****************************************************************************')
-            print('\n Jogador Nº 1 ganhou a partida!')
-            print(f' O placar do jogo está: {self.player1.placar} --||-- {self.player2.placar}')
-            print(f' O jogador Nº1 jogou "{player1_jogada}" e o jogador Nº2 jogou "{player2_jogada}".')
+            print(f' **************************')
+            print('\n Jogador Nº1 ganhou a partida.')
+            print(f' > Placar: {self.player1.placar} x {self.player2.placar}')
+            print(f' > Jogadas: "{player1_jogada}" contra "{player2_jogada}".')
 
         elif ((player2_jogada == 'pedra' and player1_jogada == 'tesoura') or
                 (player2_jogada == 'tesoura' and player1_jogada == 'papel') or
                 (player2_jogada == 'papel' and player1_jogada == 'pedra')):
             self.player2.placar += 1
-            print(f' ****************************************************************************')
-            print('\n Jogador Nº 2 ganhou a partida!')
-            print(f' O placar do jogo está: {self.player1.placar} --||-- {self.player2.placar}')
-            print(f' O jogador Nº1 jogou "{player1_jogada}" e o jogador Nº2 jogou "{player2_jogada}".')
+            print(f' **************************')
+            print('\n Jogador Nº2 ganhou a partida.')
+            print(f' > Placar: {self.player1.placar} x {self.player2.placar}')
+            print(f' > Jogadas: "{player1_jogada}" contra "{player2_jogada}".')
 
         else:
-            print(f' ****************************************************************************')
-            print('\n A partida está empatada!')
-            print(f' O placar do jogo está: {self.player1.placar} --||-- {self.player2.placar}')
-            print(f' Ambos fizeram a mesma jogada. O jogador Nº1 jogou "{player1_jogada}" e o jogador Nº2 jogou "{player2_jogada}".')
+            print(f' **************************')
+            print('\n Dessa vez deu empate.')
+            print(f' > Placar: {self.player1.placar} x {self.player2.placar}')
+            print(f' > Jogadas: "{player1_jogada}" contra "{player2_jogada}".')
 
 
 game = Game(RandomPlayer(), HumanPlayer())
 game.play_match()
 
-# chamada_escolhas = ' [1]RandomPlayer, [2]HumanPlayer, [3]ReflectPlayer, [4]CyclePlayer'
+# chamada_escolhas = ' [1]RandomPlayer, [2]HumanPlayer, '
+# '[3]ReflectPlayer, [4]CyclePlayer'
 
 # if __name__ == '__main__':
-# jogadores_disponiveis = {1: RandomPlayer(), 2: HumanPlayer(), 3: ReflectPlayer(), 4: CyclePlayer()}
+# jogadores_disponiveis = {1: RandomPlayer(), 2: HumanPlayer(), '
+# '3: ReflectPlayer(), 4: CyclePlayer()}
 # print (chamada_escolhas)
-# print(f' ************************************************************************************\n')
+# print(f' **************************\n')
 
 # e1 = input(" Digite o número correspondente ao jogador Nº1: ")
 # e2 = input(" Digite o número correspondente ao jogador Nº2: ")
 
 # game = Game(jogadores_disponiveis[e1], jogadores_disponiveis[e2])
 # game.play_match()
-
