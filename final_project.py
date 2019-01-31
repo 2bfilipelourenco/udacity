@@ -13,7 +13,6 @@ class Player():
     def play(self):
         return 'pedra'
 
-    # Se eu colocar o 'last_oponnent_move' aqui, o aplicativo dá 'crash'.
     def learn(self, my_move):
         self.my_move = my_move
 
